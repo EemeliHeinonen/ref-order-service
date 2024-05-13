@@ -1,9 +1,8 @@
 package com.eemeli.orderservice.model;
 
 import com.eemeli.orderservice.model.discount.Discount;
-import com.eemeli.orderservice.model.dto.OrderItemDTO;
-import com.eemeli.orderservice.model.dto.ReceiptItemDTO;
-import com.eemeli.orderservice.model.product.BeerProduct;
+import com.eemeli.orderservice.dto.OrderItemDTO;
+import com.eemeli.orderservice.dto.ReceiptItemDTO;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;

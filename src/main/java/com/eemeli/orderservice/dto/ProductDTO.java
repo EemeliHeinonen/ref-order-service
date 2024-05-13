@@ -1,4 +1,4 @@
-package com.eemeli.orderservice.model.product;
+package com.eemeli.orderservice.dto;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;

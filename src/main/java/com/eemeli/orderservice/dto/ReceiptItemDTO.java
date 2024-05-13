@@ -1,6 +1,5 @@
-package com.eemeli.orderservice.model.dto;
+package com.eemeli.orderservice.dto;
 
-import com.eemeli.orderservice.model.discount.BulkDiscount;
 import com.eemeli.orderservice.model.discount.Discount;
 import com.eemeli.orderservice.model.discount.DiscountType;
 import com.eemeli.orderservice.model.product.BeerProduct;

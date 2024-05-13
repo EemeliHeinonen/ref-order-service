@@ -1,8 +1,8 @@
 package com.eemeli.orderservice.service;
 
-import com.eemeli.orderservice.model.dto.OrderDTO;
-import com.eemeli.orderservice.model.dto.ReceiptDTO;
-import com.eemeli.orderservice.model.dto.ReceiptItemDTO;
+import com.eemeli.orderservice.dto.OrderDTO;
+import com.eemeli.orderservice.dto.ReceiptDTO;
+import com.eemeli.orderservice.dto.ReceiptItemDTO;
 import com.eemeli.orderservice.repository.DiscountRepository;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;

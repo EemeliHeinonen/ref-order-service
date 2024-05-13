@@ -1,5 +1,6 @@
 package com.eemeli.orderservice.utility;
 
+import com.eemeli.orderservice.dto.ProductDTO;
 import com.eemeli.orderservice.model.product.*;
 import jakarta.validation.constraints.NotNull;
 

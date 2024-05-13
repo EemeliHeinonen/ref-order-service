@@ -1,7 +1,7 @@
 package com.eemeli.orderservice.controller;
 
-import com.eemeli.orderservice.model.dto.OrderDTO;
-import com.eemeli.orderservice.model.dto.ReceiptDTO;
+import com.eemeli.orderservice.dto.OrderDTO;
+import com.eemeli.orderservice.dto.ReceiptDTO;
 import com.eemeli.orderservice.service.OrderService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.MediaType;

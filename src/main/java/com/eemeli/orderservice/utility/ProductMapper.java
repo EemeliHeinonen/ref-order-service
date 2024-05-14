@@ -14,4 +14,21 @@ public class ProductMapper {
 
         return new BeerProduct(productDTO.name(), productDTO.unitPriceInCents());
     }
+
+    public static ProductDTO mapProductToProductDTO(@NotNull Product product) {
+        var weightInGrams = product instanceof VegetableProduct vegetableProduct
+                ? vegetableProduct.weightInGrams()
+                : null;
+
+        var createdAtDate = product instanceof BreadProduct breadProduct
+                ? breadProduct.createdAtDate()
+                : null;
+
+        return new ProductDTO(
+                product.name(),
+                product.unitPriceInCents(),
+                weightInGrams,
+                createdAtDate
+        );
+    }
 }

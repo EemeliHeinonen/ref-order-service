@@ -6,7 +6,8 @@ import com.eemeli.orderservice.model.product.BeerProduct;
 import com.eemeli.orderservice.model.product.BreadProduct;
 import com.eemeli.orderservice.model.product.Product;
 import com.eemeli.orderservice.model.product.VegetableProduct;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -16,9 +17,12 @@ import static com.eemeli.orderservice.utility.DiscountResolver.*;
 import static com.eemeli.orderservice.utility.ProductMapper.mapProductDTOToProduct;
 
 public record ReceiptItemDTO(
+        @Positive
         int quantity,
-        @NotNull String productName,
-        @NotNull BigDecimal totalPrice
+        @NotBlank
+        String productName,
+        @Positive
+        BigDecimal totalPrice
 ) {
     public static class Builder {
         private final OrderItemDTO orderItemDTO;

@@ -3,6 +3,7 @@ package com.eemeli.orderservice.controller;
 import com.eemeli.orderservice.dto.OrderDTO;
 import com.eemeli.orderservice.dto.ReceiptDTO;
 import com.eemeli.orderservice.service.OrderService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public @NotNull ResponseEntity<ReceiptDTO> postOrder(@RequestBody OrderDTO orderDTO) {
+    public @NotNull ResponseEntity<ReceiptDTO> postOrder(@Valid @RequestBody OrderDTO orderDTO) {
         var createdReceipt = orderService.createOrder(orderDTO);
         return ResponseEntity.ok()
                 .body(createdReceipt);

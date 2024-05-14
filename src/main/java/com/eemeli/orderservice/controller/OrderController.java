@@ -1,5 +1,6 @@
 package com.eemeli.orderservice.controller;
 
+import com.eemeli.orderservice.controller.resources.OrderResources;
 import com.eemeli.orderservice.dto.OrderDTO;
 import com.eemeli.orderservice.dto.ReceiptDTO;
 import com.eemeli.orderservice.service.OrderService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/v1/orders", produces = MediaType.APPLICATION_JSON_VALUE)
-public class OrderController {
+public class OrderController implements OrderResources {
     private final OrderService orderService;
 
     OrderController(OrderService orderService) {

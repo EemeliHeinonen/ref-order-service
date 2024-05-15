@@ -14,6 +14,7 @@ import java.util.List;
 
 @Repository
 public class ProductRepository {
+    // placeholder for a DB
     private final HashMap<String, Product> productByName = new HashMap<>() {{
         put("Bread 1d", new BreadProduct("Bread", 100, LocalDate.now().minusDays(1)));
         put("Bread 3d", new BreadProduct("Bread", 100, LocalDate.now().minusDays(3)));

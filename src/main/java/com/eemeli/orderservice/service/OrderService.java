@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -29,6 +30,10 @@ public class OrderService {
                 .map(ReceiptItemDTO::totalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return new ReceiptDTO(receiptItems, receiptTotal);
+        List<String> printableReceiptItems = receiptItems.stream()
+                .map(ReceiptItemDTO::toString)
+                .toList();
+
+        return new ReceiptDTO(printableReceiptItems, receiptTotal);
     }
 }

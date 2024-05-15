@@ -8,7 +8,7 @@ import java.util.List;
 
 public record ReceiptDTO(
         @NotEmpty
-        List<ReceiptItemDTO> receiptItems,
+        List<String> receiptItems,
         @NotNull
         BigDecimal receiptTotal
 ) {

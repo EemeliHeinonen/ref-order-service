@@ -26,16 +26,17 @@ public record ReceiptItemDTO(
 ) {
     public static class Builder {
         private final OrderItemDTO orderItemDTO;
+        private final Product product;
         private long finalPrice;
 
         public Builder(OrderItemDTO orderItemDTO) {
             this.orderItemDTO = orderItemDTO;
-            this.finalPrice = 0;
+            this.product = mapProductDTOToProduct(orderItemDTO.product());
+            this.finalPrice = this.product.originalPriceInCents(orderItemDTO.quantity());
         }
 
         public Builder applyDiscounts(Map<DiscountType, Discount> discountsByType) {
             var productQuantity = orderItemDTO.quantity();
-            Product product = mapProductDTOToProduct(orderItemDTO.product());
 
             this.finalPrice = switch (product) {
                 case BeerProduct beer -> resolveDiscountedBeerPrice(
@@ -54,21 +55,18 @@ public record ReceiptItemDTO(
                                 vegetable.weightInGrams(),
                                 vegetable.unitPriceInCents(),
                                 discountsByType.get(DiscountType.VEG_PERCENTAGE_500_G)
-                        );
+                );
                 case VegetableProduct vegetable when vegetable.weightInGrams() > 100
                         -> resolveDiscountedVegetablesPrice(
                                 vegetable.weightInGrams(),
                                 vegetable.unitPriceInCents(),
                                 discountsByType.get(DiscountType.VEG_PERCENTAGE_100_G)
-                        );
+                );
                 case VegetableProduct vegetable
                         -> resolveDiscountedVegetablesPrice(
                                 vegetable.weightInGrams(),
                                 vegetable.unitPriceInCents(),
                                 discountsByType.get(DiscountType.VEG_PERCENTAGE_1_G)
-                        );
-                default -> throw new IllegalStateException(
-                        "Failed to map ProductDTO to an existing Product type: " + product
                 );
             };
 

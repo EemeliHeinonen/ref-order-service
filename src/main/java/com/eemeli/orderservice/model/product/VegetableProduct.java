@@ -7,4 +7,8 @@ public record VegetableProduct(
         @NotNull int unitPriceInCents,
         @NotNull int weightInGrams
 ) implements Product {
+    @Override
+    public long originalPriceInCents(int ignored) {
+        return (long) weightInGrams * unitPriceInCents / 100;
+    }
 }

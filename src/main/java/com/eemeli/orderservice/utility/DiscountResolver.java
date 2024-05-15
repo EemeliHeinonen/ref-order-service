@@ -34,7 +34,7 @@ public class DiscountResolver {
             if (discount instanceof BuyXTakeYDiscount buy1Take3Discount) {
                 return calculateBuyXTakeYDiscountedPrice(quantity, unitPrice, buy1Take3Discount);
             }
-        } else if (breadAgeDays >= 3) {
+        } else if (breadAgeDays >= 3 && breadAgeDays < 6) {
             var discount = discountsByType.get(DiscountType.BREAD_BUY_1_TAKE_2);
             if (discount instanceof BuyXTakeYDiscount buy1Take2Discount) {
                 return calculateBuyXTakeYDiscountedPrice(quantity, unitPrice, buy1Take2Discount);

@@ -2,6 +2,8 @@ package com.eemeli.orderservice.exception;
 
 import com.eemeli.orderservice.dto.ErrorDTO;
 import com.eemeli.orderservice.model.APIError;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -16,6 +18,7 @@ import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class ControllerAdviceException {
+    private static final Logger logger = LoggerFactory.getLogger(ControllerAdviceException.class);
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -27,31 +30,43 @@ public class ControllerAdviceException {
                 .map(this::formatErrorMessage)
                 .toList();
 
-        return new ErrorDTO(
+        var error = new ErrorDTO(
                 APIError.VALIDATION_ERROR.getCode(),
                 APIError.VALIDATION_ERROR.getMessage(),
                 errors
         );
+
+        logger.error("Validation failure - {}", error);
+
+        return error;
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDTO badRequestHandler(HttpMessageNotReadableException exception) {
-        return new ErrorDTO(
+        var error = new ErrorDTO(
                 APIError.BAD_FORMAT.getCode(),
                 APIError.BAD_FORMAT.getMessage(),
                 List.of()
         );
+
+        logger.error("Bad request - {}", error);
+
+        return error;
     }
 
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorDTO notFoundHandler(NoSuchElementException exception) {
-        return new ErrorDTO(
+        var error = new ErrorDTO(
                 APIError.NOT_FOUND.getCode(),
                 APIError.NOT_FOUND.getMessage(),
                 List.of(exception.getMessage())
         );
+
+        logger.error("Element not found - {}", error);
+
+        return error;
     }
 
     private String formatErrorMessage(ObjectError error) {
